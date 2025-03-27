@@ -2,6 +2,7 @@ import { Button, Container, Form, InputGroup, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import PopUp from "../Components/PopUp";
+import { useNavigate } from "react-router-dom";
 
 interface signUpFormat {
   username: string;
@@ -10,6 +11,8 @@ interface signUpFormat {
 }
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const [credentials, setCredentials] = useState<signUpFormat>({
     username: "",
     password: "",
@@ -30,13 +33,20 @@ const SignUp = () => {
 
   const handleSignUp = (): void => {
     setIsError(false);
-
-    if (credentials.password == credentials.confirmation) {
+    if (
+      credentials.password == credentials.confirmation &&
+      (credentials.password != "" || credentials.confirmation != "")
+    ) {
       callSignUp();
     } else {
-      setError("Passwords words do not match, please correct this error.");
-      console.error({ error: "password does not match confirmation" });
       setIsError(true);
+      if (credentials.password != credentials.confirmation) {
+        setError("Passwords do not match, please correct this error.");
+      } else if (credentials.password == "" || credentials.confirmation == "") {
+        setError("Cannot leave password fields empty.");
+      } else {
+        setError("Unknown Error, Please try Again.");
+      }
     }
   };
   const callSignUp = async () => {
@@ -56,7 +66,7 @@ const SignUp = () => {
       const res = await response.json();
 
       if (response.ok) {
-        console.log("new user created!");
+        navigate("/login");
       } else {
         setIsError(true);
         setError(res.error);
