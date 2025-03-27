@@ -1,7 +1,7 @@
 import { Button, Container, Form, InputGroup, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-//
+
 interface signUpFormat {
   username: string;
   password: string;
