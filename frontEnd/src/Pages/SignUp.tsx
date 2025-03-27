@@ -1,6 +1,7 @@
 import { Button, Container, Form, InputGroup, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import PopUp from "../Components/PopUp";
 
 interface signUpFormat {
   username: string;
@@ -15,9 +16,12 @@ const SignUp = () => {
     confirmation: "",
   });
 
+  const [error, setError] = useState<string>();
+  const [isError, setIsError] = useState<boolean>(false);
+
   const handleInputField = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-
+    setIsError(false);
     setCredentials((prevValues) => ({
       ...prevValues,
       [name]: value,
@@ -25,10 +29,14 @@ const SignUp = () => {
   };
 
   const handleSignUp = (): void => {
+    setIsError(false);
+
     if (credentials.password == credentials.confirmation) {
       callSignUp();
     } else {
+      setError("Passwords words do not match, please correct this error.");
       console.error({ error: "password does not match confirmation" });
+      setIsError(true);
     }
   };
   const callSignUp = async () => {
@@ -50,8 +58,8 @@ const SignUp = () => {
       if (response.ok) {
         console.log("new user created!");
       } else {
-        // setError(true);
-        // setErrorText(res.error);
+        setIsError(true);
+        setError(res.error);
         console.log({
           error: res.error,
         });
@@ -71,6 +79,10 @@ const SignUp = () => {
       <Row className="h-auto py-2 justify-content-around">
         <Col xs={10} lg={4}>
           <h1>Sign Up</h1>
+          <PopUp
+            isActive={isError}
+            text={error || "Unknown issue, Please try again"}
+          ></PopUp>
           <Form>
             <InputGroup className="my-3">
               <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
