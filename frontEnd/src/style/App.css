@@ -1,0 +1,47 @@
+.side-menu {
+    border-bottom: grey solid 1px;
+}
+
+.side-menu-item {
+    margin-top: 0.3rem;
+    border-radius: 0.4rem;
+    padding: 0.5rem;
+}
+
+.side-menu-item:hover {
+    background-color: #ebebeb;
+    transition: 0.3s;
+}
+
+.dropdown-closed {
+    height: 2rem;
+    margin-top: 5px;
+    transition: 0.3s;
+    overflow: hidden;
+    border-bottom: lightgray 1px solid;
+}
+.dropdown-open {
+    height: 16rem;
+    margin-top: 5px;
+    transition: 0.3s;
+    border-bottom: lightgray 1px solid;
+}
+.dropdown-title {
+    font-size: 16px;
+    font-weight: 500;
+}
+.dropdown-icon-rotate {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease-in-out;
+}
+.dropdown-icon-center {
+    transition: transform 0.3s ease-in-out;
+}
+.dropdown-item {
+    border-radius: 0.4rem;
+}
+
+.dropdown-item:hover {
+    background-color: #ebebeb;
+    transition: 0.3s ease-in-out;
+}
