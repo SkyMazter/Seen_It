@@ -1,5 +1,5 @@
 .side-menu {
-    border-bottom: grey solid 1px;
+    border-bottom: lightgray solid 1px;
 }
 
 .side-menu-item {
@@ -42,6 +42,26 @@
 }
 
 .dropdown-item:hover {
+    background-color: #ebebeb;
+    transition: 0.3s ease-in-out;
+}
+.outer-post {
+    border-bottom: lightgray 1px solid;
+}
+.post {
+    border-radius: 0.4rem;
+}
+
+.post-title {
+    padding-bottom: 1rem;
+    font-weight: 600;
+}
+
+.post-description {
+    padding-bottom: 1rem;
+}
+
+.post:hover {
     background-color: #ebebeb;
     transition: 0.3s ease-in-out;
 }

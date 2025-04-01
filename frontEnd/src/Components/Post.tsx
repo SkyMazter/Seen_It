@@ -1,4 +1,9 @@
-import { Badge, Button } from "react-bootstrap";
+import Badge from "react-bootstrap/Badge";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+
 interface Props {
   username: string;
   description: string;
@@ -9,45 +14,34 @@ interface Props {
 
 const Post = ({ username, description, category, title }: Props) => {
   return (
-    <div className="container-fluid bg-success-subtle my-3 p-3 shadow-sm rounded-4">
-      <div className="row">
-        <div className="col-5 col-md-3">
-          <div className=" my-auto ">
-            <h5>@{username}</h5>
-          </div>
-        </div>
-
-        <div className="col-7 col-md-9 m-auto text-center">
-          <h2>{title}</h2>
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col-auto">
-          <h4>Description:</h4>
-          <p className=" bg-body-secondary rounded p-2">{description}</p>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
-          <div className="d-flex justify-content-between align-items-center my-auto">
-            <div className=" bg-body-secondary rounded p-2">
-              <strong>
-                <p>Category:</p>
-              </strong>
-              <Badge pill bg="info">
-                {category}
-              </Badge>
-            </div>
-            <div className=" d-flex justify-content-evenly">
-              <Button className="m-1">Download</Button>
-              <Button variant="outline-info" className="m-1">
-                Preview
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="outer-post">
+      <Container fluid className="my-1 py-3 post">
+        <Row>
+          <Col className="d-flex justify-content-start align-items-center">
+            @{username}
+          </Col>
+          <Col className="d-flex justify-content-end align-items-center">
+            <Badge pill bg="danger">
+              {category}
+            </Badge>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="post-title">{title}</Col>
+        </Row>
+        <Row>
+          <Col className="post-description">{description}</Col>
+        </Row>
+        <Row>
+          <Col>
+            <Button variant="outline-success" className="me-2">
+              {" "}
+              Download{" "}
+            </Button>
+            <Button variant="outline-dark"> Preview </Button>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };

@@ -12,7 +12,10 @@ const App = () => {
       <NavBar />
       <Container fluid style={{ height: "93vh" }}>
         <Row>
-          <Col lg={2} className="d-none d-sm-block">
+          <Col
+            lg={2}
+            className="d-none d-lg-block border-end border-secondary-subtle"
+          >
             <SideMenu />
           </Col>
           <Col style={{ height: "93vh", overflow: "scroll" }}>
