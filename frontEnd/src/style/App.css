@@ -9,7 +9,7 @@
 }
 
 .side-menu-item:hover {
-    background-color: #ebebeb;
+    background-color: #f5f7fa;
     transition: 0.3s;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .dropdown-item:hover {
-    background-color: #ebebeb;
+    background-color: #f5f7fa;
     transition: 0.3s ease-in-out;
 }
 .outer-post {
@@ -62,6 +62,6 @@
 }
 
 .post:hover {
-    background-color: #ebebeb;
+    background-color: #f5f7fa;
     transition: 0.3s ease-in-out;
 }

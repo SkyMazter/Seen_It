@@ -1,6 +1,39 @@
 import { Request, Response } from "express";
 import Post from "../models/posts";
 
+interface PostStruct {
+  userId: number;
+  title: string;
+  category: string;
+  fileName: string;
+  description: string;
+  filePath: string;
+}
+
+//helper function
+const handleEmpty = (
+  userId: number,
+  title: string,
+  category: string,
+  description: string,
+  fileName: string,
+  filePath: string,
+): string | undefined => {
+  if (userId == null) {
+    return "userId";
+  } else if (title == "") {
+    return "title";
+  } else if (category == "") {
+    return "category";
+  } else if (description == "") {
+    return "description";
+  } else if (fileName == "") {
+    return "fileName";
+  } else if (filePath == "") {
+    return "filePath";
+  }
+};
+
 const newPost = async (req: Request, res: Response) => {
   const {
     userId,
@@ -8,28 +41,19 @@ const newPost = async (req: Request, res: Response) => {
     category,
     fileName,
     description,
-  }: {
-    userId: number;
-    title: string;
-    category: string;
-    fileName: string;
-    description: string;
-  } = req.body;
+    filePath,
+  }: PostStruct = req.body;
 
-  var handleEmpty: string = "";
-  handleEmpty = !userId
-    ? "userId"
-    : "" || !title
-    ? "title"
-    : "" || !category
-    ? "category"
-    : "" || !fileName
-    ? "fileName"
-    : "" || !description
-    ? "description"
-    : "";
+  const errorMessage: string | undefined = handleEmpty(
+    userId,
+    title,
+    category,
+    fileName,
+    description,
+    filePath,
+  );
 
-  if (handleEmpty) {
+  if (errorMessage) {
     res.status(400);
     return res.json({ error: `Failed to login missing field: ${handleEmpty}` });
   }
@@ -41,18 +65,19 @@ const newPost = async (req: Request, res: Response) => {
       category: category,
       fileName: fileName,
       description: description,
+      filePath: filePath,
     });
 
     res.status(200);
     return res.json({
-      success: "New user created!",
+      success: "New Post created!",
       userId: userId,
       title: title,
       category: category,
       fileName: fileName,
       description: description,
+      filePath: filePath,
     });
-
   } catch (error) {
     res.status(400);
     return res.json({
@@ -61,4 +86,4 @@ const newPost = async (req: Request, res: Response) => {
   }
 };
 
-export {newPost};
+export { newPost };

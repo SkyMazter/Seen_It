@@ -4,7 +4,7 @@ import userRouter from "./routes/users";
 import postRouter from "./routes/posts";
 import bodyParser from "body-parser";
 import cors from "cors";
-import sequelize from "./connection";
+import { sequelize } from "./models";
 
 const app: express.Application = express();
 const port = 3001;
@@ -14,10 +14,10 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use("/users", userRouter);
-app.use("/posts", postRouter)
+app.use("/posts", postRouter);
 
 sequelize
-  .sync()
+  .sync({ force: true })
   .then((): void => {
     app.listen(port, (): void => {
       console.log(`Server is running on port ${port}`);

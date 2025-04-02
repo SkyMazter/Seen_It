@@ -7,10 +7,14 @@ import { CiSquareChevUp } from "react-icons/ci";
 interface props {
   children?: React.ReactNode;
   title: string;
+  openOnLoad?: boolean;
 }
 
-const Dropdown = ({ children, title }: props) => {
-  const [dropdown, setDropdown] = useState<string>("dropdown-closed");
+const Dropdown = ({ children, title, openOnLoad }: props) => {
+  const [dropdown, setDropdown] = useState<string>(
+    openOnLoad == true ? "dropdown-open" : "dropdown-closed",
+  );
+
   const handleDropdown = () => {
     if (dropdown == "dropdown-closed") {
       setDropdown("dropdown-open");

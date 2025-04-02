@@ -29,7 +29,7 @@ const SideMenu = () => {
         <Row></Row>
       </Container>
 
-      <Dropdown title="Categories">
+      <Dropdown title="Categories" openOnLoad={true}>
         <DropdownItem title="Mapping">
           {/* icon */}
           <CiMap />

@@ -1,11 +1,11 @@
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LoginStatus from "./LoginStatus";
 import { useAppSelector } from "../hooks/hooks";
 import Button from "react-bootstrap/Button";
-import { CiMenuBurger } from "react-icons/ci";
+import { CiMenuBurger, CiCirclePlus } from "react-icons/ci";
 import { useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import SideMenu from "./SideMenu";
@@ -17,6 +17,7 @@ const NavBar = () => {
   const handleShow = () => {
     setShow(true);
   };
+
   const handleHide = () => {
     setShow(false);
   };
@@ -34,9 +35,14 @@ const NavBar = () => {
             </Button>
             PNKArchive
           </Col>
-          <Col xs={3} lg={5}></Col>
+
           <Col className="d-flex align-items-center justify-content-end">
             <LoginStatus isLoggedIn={logged_in} />
+            <Link to="/Submit" className={logged_in ? "d-show ms-3" : "d-none"}>
+              <Button variant="light">
+                <CiCirclePlus />
+              </Button>
+            </Link>
           </Col>
         </Row>
       </Container>

@@ -8,6 +8,7 @@ class Post extends Model {
   public category!: string;
   public fileName!: string;
   public description!: string;
+  public filePath!: string;
 }
 
 Post.init(
@@ -36,12 +37,16 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    filePath: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     sequelize,
     modelName: "Post",
     timestamps: true,
-  }
+  },
 );
 
 export default Post;

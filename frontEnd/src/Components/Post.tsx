@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { CiSaveDown1, CiShare1 } from "react-icons/ci";
 
 interface Props {
   username: string;
@@ -35,10 +36,13 @@ const Post = ({ username, description, category, title }: Props) => {
         <Row>
           <Col>
             <Button variant="outline-success" className="me-2">
-              {" "}
-              Download{" "}
+              Download
+              <CiSaveDown1 className="ms-1" />
             </Button>
-            <Button variant="outline-dark"> Preview </Button>
+            <Button variant="outline-dark">
+              {" "}
+              Preview <CiShare1 className="ms-1" />
+            </Button>
           </Col>
         </Row>
       </Container>

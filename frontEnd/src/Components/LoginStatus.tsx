@@ -14,7 +14,7 @@ const LoginStatus = ({ isLoggedIn }: Props) => {
         <Button variant={"light"}>Login</Button>
       </Link>
     );
-  return <Navbar.Text>Signed in as: @{currentUsrn}</Navbar.Text>;
+  return <Navbar.Text>@{currentUsrn}</Navbar.Text>;
 };
 
 export default LoginStatus;
