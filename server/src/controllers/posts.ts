@@ -17,7 +17,7 @@ const handleEmpty = (
   category: string,
   description: string,
   fileName: string,
-  filePath: string,
+  filePath: string
 ): string | undefined => {
   if (userId == null) {
     return "userId";
@@ -50,7 +50,7 @@ const newPost = async (req: Request, res: Response) => {
     category,
     fileName,
     description,
-    filePath,
+    filePath
   );
 
   if (errorMessage) {
@@ -86,4 +86,14 @@ const newPost = async (req: Request, res: Response) => {
   }
 };
 
-export { newPost };
+const getAllPosts = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const posts = await Post.findAll();
+    return res.json(posts); // ✅ Always return a response
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return res.status(500).json({ error: "Internal Server Error" }); // ✅ Ensures all paths return a Response
+  }
+};
+
+export { newPost, getAllPosts };
