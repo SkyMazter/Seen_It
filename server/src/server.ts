@@ -15,9 +15,10 @@ app.use(bodyParser.json());
 
 app.use("/users", userRouter);
 app.use("/posts", postRouter);
+app.use("/uploads", express.static("uploads"));
 
 sequelize
-  .sync({ force: true })
+  .sync({ alter: true })
   .then((): void => {
     app.listen(port, (): void => {
       console.log(`Server is running on port ${port}`);

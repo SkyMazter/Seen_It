@@ -1,21 +1,18 @@
-import Alert from 'react-bootstrap/Alert';
-// import { useState } from 'react';
+import Alert from "react-bootstrap/Alert";
 
 interface Props {
-    isActive: boolean;
-    text: string;
+  isActive: boolean;
+  text: string;
 }
 
-const PopUp = ({isActive, text}:Props) => {
- // const [show, setShow] = useState(isActive);
-
-  if(isActive) {
+const PopUp = ({ isActive, text }: Props) => {
+  if (isActive) {
     return (
-        <Alert variant='danger'  dismissible>
-            <Alert.Heading>{text}</Alert.Heading>
-        </Alert>
-      )
+      <Alert variant="danger" dismissible>
+        <Alert.Heading>{text}</Alert.Heading>
+      </Alert>
+    );
   }
-}
+};
 
-export default PopUp
+export default PopUp;

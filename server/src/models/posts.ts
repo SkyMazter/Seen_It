@@ -5,6 +5,7 @@ class Post extends Model {
   public id!: number;
   public userId!: number;
   public title!: string;
+  public username!: string;
   public category!: string;
   public fileName!: string;
   public description!: string;
@@ -20,8 +21,13 @@ Post.init(
     },
     userId: {
       type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
     },
     title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },

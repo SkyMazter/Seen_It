@@ -2,44 +2,58 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Post from "./Post";
+import { useState, useEffect } from "react";
+
+interface Posts {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  filePath: string;
+  fileName: string;
+  username: string;
+}
 
 const PostView = () => {
+  const [posts, setPosts] = useState<Posts[]>([]);
+  const [show, setShow] = useState<boolean>(false);
+
   const style = {
     overflow: "auto",
   };
+
+  const handleGetPosts = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/posts/last");
+      const data = await response.json();
+      setPosts(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    handleGetPosts();
+    setShow(true);
+  }, []);
+
   return (
     <div>
       <Container fluid={"sm"} style={style}>
         <Row>
           <Col className="">
-            <Post
-              file=""
-              username="Username"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-              title="Post Name/Title"
-              category="Category"
-            ></Post>
-            <Post
-              file=""
-              username="Username"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-              title="Post"
-              category="Other"
-            ></Post>
-            <Post
-              file=""
-              username="Username"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-              title="Post"
-              category="Other"
-            ></Post>
-            <Post
-              file=""
-              username="Username"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-              title="Post"
-              category="Other"
-            ></Post>
+            {show
+              ? posts.map((post, index) => (
+                  <Post
+                    file=""
+                    key={index}
+                    username={post.username}
+                    description={post.description}
+                    title={post.title}
+                    category={post.category}
+                  ></Post>
+                ))
+              : ""}
           </Col>
         </Row>
       </Container>
