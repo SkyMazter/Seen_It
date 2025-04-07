@@ -10,10 +10,53 @@ interface Props {
   description: string;
   title: string;
   category: string | undefined;
-  file: string | undefined;
+  fileName: string;
+  filePath: string;
 }
 
-const Post = ({ username, description, category, title }: Props) => {
+const Post = ({
+  username,
+  description,
+  category,
+  title,
+  fileName,
+  filePath,
+}: Props) => {
+  const handlePreview = () => {
+    const downloadUrl = `http://localhost:3001${filePath}`; // Construct the file URL
+    console.log(downloadUrl);
+    const link = document.createElement("a");
+    link.href = downloadUrl;
+    link.download = fileName; // Suggest a filename
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  const handleDownload = async () => {
+    try {
+      const downloadUrl = `http://localhost:3001${filePath}`; // Construct the file URL
+      console.log(downloadUrl);
+      // Fetch the file as a Blob
+      const response = await fetch(downloadUrl);
+      if (!response.ok) throw new Error("Failed to fetch file");
+
+      const blob = await response.blob(); // Convert response to Blob
+
+      // Create a temporary link
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = fileName; // Set the download filename
+      document.body.appendChild(link);
+      link.click();
+
+      // Cleanup
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
+  };
+
   return (
     <div className="outer-post">
       <Container fluid className="my-1 py-3 post">
@@ -35,12 +78,15 @@ const Post = ({ username, description, category, title }: Props) => {
         </Row>
         <Row>
           <Col>
-            <Button variant="outline-success" className="me-2">
+            <Button
+              variant="outline-success"
+              className="me-2"
+              onClick={handleDownload}
+            >
               Download
               <CiSaveDown1 className="ms-1" />
             </Button>
-            <Button variant="outline-dark">
-              {" "}
+            <Button variant="outline-dark" onClick={handlePreview}>
               Preview <CiShare1 className="ms-1" />
             </Button>
           </Col>

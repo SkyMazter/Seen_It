@@ -1,16 +1,13 @@
-import { Button, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Row from "react-bootstrap/Row";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks/hooks";
 import { useState } from "react";
-
-// interface PostStruct {
-//   userId: number;
-//   title: string;
-//   username: string;
-//   category: string;
-
-//   description: string;
-// }
 
 const Submit = () => {
   const currentUsrn: string = useAppSelector((state) => state.user.username);

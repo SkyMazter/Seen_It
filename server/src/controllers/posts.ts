@@ -99,11 +99,19 @@ const getAllPosts = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
-const getLast50Posts = async (req: Request, res: Response) => {
+const getLastPosts = async (req: Request, res: Response) => {
   try {
+    const n = parseInt(req.query.n as string) || 50;
+
+    if (n <= 0) {
+      return res
+        .status(400)
+        .json({ message: "Number of posts must be greater than 0" });
+    }
+
     const posts = await Post.findAll({
-      order: [["createdAt", "DESC"]], // Get the newest posts first
-      limit: 50, // Only return the last 50 posts
+      order: [["createdAt", "DESC"]],
+      limit: n,
     });
 
     res.json(posts);
@@ -113,4 +121,4 @@ const getLast50Posts = async (req: Request, res: Response) => {
   }
 };
 
-export { newPost, getAllPosts, getLast50Posts };
+export { newPost, getAllPosts, getLastPosts };

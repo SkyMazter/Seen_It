@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Post from "./Post";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 interface Posts {
   id: string;
@@ -17,25 +17,32 @@ interface Posts {
 const PostView = () => {
   const [posts, setPosts] = useState<Posts[]>([]);
   const [show, setShow] = useState<boolean>(false);
+  const [postCount, setPostCount] = useState<number>(30);
 
   const style = {
     overflow: "auto",
   };
 
-  const handleGetPosts = async () => {
+  const handleGetPosts = useCallback(async () => {
     try {
-      const response = await fetch("http://localhost:3001/posts/last");
+      const response = await fetch(
+        `http://localhost:3001/posts/last?n=${postCount}`,
+      );
       const data = await response.json();
       setPosts(data);
     } catch (error) {
       console.error(error);
     }
+  }, [postCount]);
+
+  const handleLoadMore = () => {
+    setPostCount(postCount + 20);
   };
 
   useEffect(() => {
     handleGetPosts();
     setShow(true);
-  }, []);
+  }, [handleGetPosts]);
 
   return (
     <div>
@@ -45,7 +52,8 @@ const PostView = () => {
             {show
               ? posts.map((post, index) => (
                   <Post
-                    file=""
+                    fileName={post.fileName}
+                    filePath={post.filePath}
                     key={index}
                     username={post.username}
                     description={post.description}
@@ -54,6 +62,11 @@ const PostView = () => {
                   ></Post>
                 ))
               : ""}
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <button onClick={handleLoadMore}>Load More</button>
           </Col>
         </Row>
       </Container>
