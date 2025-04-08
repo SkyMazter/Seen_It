@@ -11,14 +11,17 @@ import {
   CiWheat,
   CiMonitor,
 } from "react-icons/ci";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SideMenu = () => {
   return (
     <div>
       <Container className="side-menu py-2 my-1">
         <Row>
-          <Col className="side-menu-item">Home</Col>
+          <Col className="side-menu-item">
+            {" "}
+            <Link to="/"> Home</Link>
+          </Col>
         </Row>
         <Row>
           <Col className="side-menu-item">Popular</Col>
@@ -30,35 +33,49 @@ const SideMenu = () => {
       </Container>
 
       <Dropdown title="Categories" openOnLoad={true}>
-        <DropdownItem title="Mapping">
-          {/* icon */}
-          <CiMap />
-        </DropdownItem>
+        <Link to="/mapping">
+          <DropdownItem title="Mapping">
+            {/* icon */}
+            <CiMap />
+          </DropdownItem>
+        </Link>
 
-        <DropdownItem title="Networking">
-          {/* icon */}
-          <CiRouter />
-        </DropdownItem>
+        <Link to="/networking">
+          <DropdownItem title="Networking">
+            {/* icon */}
+            <CiRouter />
+          </DropdownItem>
+        </Link>
 
-        <DropdownItem title="Software">
-          {/* icon */}
-          <CiUsb />
-        </DropdownItem>
+        <Link to="/software">
+          <DropdownItem title="Software">
+            {/* icon */}
+            <CiUsb />
+          </DropdownItem>
+        </Link>
 
-        <DropdownItem title="Health">
-          {/* icon */}
-          <CiMedicalCross />
-        </DropdownItem>
+        <Link to="health">
+          <DropdownItem title="Health">
+            {/* icon */}
+            <CiMedicalCross />
+          </DropdownItem>
+        </Link>
 
-        <DropdownItem title="Environmental">
-          {/* icon */}
-          <CiWheat />
-        </DropdownItem>
+        <Link to="environmental">
+          {" "}
+          <DropdownItem title="Environmental">
+            {/* icon */}
+            <CiWheat />
+          </DropdownItem>
+        </Link>
 
-        <DropdownItem title="Entertainment">
-          {/* icon */}
-          <CiMonitor />
-        </DropdownItem>
+        <Link to="entertainment">
+          {" "}
+          <DropdownItem title="Entertainment">
+            {/* icon */}
+            <CiMonitor />
+          </DropdownItem>
+        </Link>
       </Dropdown>
       <Dropdown title="Other"></Dropdown>
     </div>

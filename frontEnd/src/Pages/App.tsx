@@ -1,10 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "../Components/NavBar";
-import PostView from "../Components/PostView";
+// import PostView from "../Components/PostView";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import SideMenu from "../Components/SideMenu";
+import { Outlet } from "react-router-dom";
 
 const App = () => {
   return (
@@ -19,7 +20,8 @@ const App = () => {
             <SideMenu />
           </Col>
           <Col style={{ height: "93vh", overflow: "scroll" }}>
-            <PostView />
+            {/* <PostView /> */}
+            <Outlet />
           </Col>
         </Row>
       </Container>

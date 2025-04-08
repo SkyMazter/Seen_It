@@ -1,9 +1,9 @@
+import { useParams } from "react-router";
+import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Post from "./Post";
-import Button from "react-bootstrap/Button";
-import { useState, useEffect, useCallback } from "react";
 
 interface Posts {
   id: string;
@@ -15,35 +15,31 @@ interface Posts {
   username: string;
 }
 
-const PostView = () => {
-  const [posts, setPosts] = useState<Posts[]>([]);
+const FilteredView = () => {
   const [show, setShow] = useState<boolean>(false);
-  const [postCount, setPostCount] = useState<number>(30);
+  const [posts, setPosts] = useState<Posts[]>([]);
+  const param = useParams();
 
-  const style = {
-    overflow: "auto",
-  };
-
-  const handleGetPosts = useCallback(async () => {
+  const handleGetFilteredPosts = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/posts/last?n=${postCount}`,
+        `http://localhost:3001/posts/filter?category=${param.category}`
       );
       const data = await response.json();
+
       setPosts(data);
+      return data;
     } catch (error) {
       console.error(error);
     }
-  }, [postCount]);
-
-  const handleLoadMore = () => {
-    setPostCount(postCount + 20);
   };
-
+  const style = {
+    overflow: "auto",
+  };
   useEffect(() => {
-    handleGetPosts();
+    handleGetFilteredPosts();
     setShow(true);
-  }, [handleGetPosts]);
+  }, [param]);
 
   return (
     <div>
@@ -65,16 +61,9 @@ const PostView = () => {
               : ""}
           </Col>
         </Row>
-        <Row xs={12}>
-          <Col className="d-flex justify-content-center py-1">
-            <Button variant="light" onClick={handleLoadMore}>
-              Load More
-            </Button>
-          </Col>
-        </Row>
       </Container>
     </div>
   );
 };
 
-export default PostView;
+export default FilteredView;

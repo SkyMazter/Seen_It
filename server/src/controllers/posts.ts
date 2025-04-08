@@ -36,7 +36,7 @@ const handleEmpty = (
   }
 };
 
-const newPost = async (req: Request, res: Response) => {
+const newPost = async (req: Request, res: Response): Promise<Response> => {
   const { userId, title, username, category, description }: PostStruct =
     req.body;
 
@@ -99,7 +99,7 @@ const getAllPosts = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
-const getLastPosts = async (req: Request, res: Response) => {
+const getLastPosts = async (req: Request, res: Response): Promise<Response> => {
   try {
     const n = parseInt(req.query.n as string) || 50;
 
@@ -114,11 +114,27 @@ const getLastPosts = async (req: Request, res: Response) => {
       limit: n,
     });
 
-    res.json(posts);
+    return res.json(posts);
   } catch (error) {
     console.error("Error fetching posts:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
-export { newPost, getAllPosts, getLastPosts };
+const getFilteredPosts = async (
+  req: Request,
+  res: Response,
+): Promise<Response> => {
+  const category: string = req.query.category as string;
+  try {
+    const posts = await Post.findAll({
+      where: { category: category },
+    });
+    return res.json(posts);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+export { newPost, getAllPosts, getLastPosts, getFilteredPosts };

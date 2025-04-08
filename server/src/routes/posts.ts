@@ -1,5 +1,10 @@
 import express from "express";
-import { newPost, getAllPosts, getLastPosts } from "../controllers/posts";
+import {
+  newPost,
+  getAllPosts,
+  getLastPosts,
+  getFilteredPosts,
+} from "../controllers/posts";
 import multer from "multer";
 
 const storage = multer.diskStorage({
@@ -17,5 +22,6 @@ const router: express.Router = express.Router();
 router.post("/new", upload.single("file"), newPost);
 router.get("/all", getAllPosts);
 router.get("/last", getLastPosts);
+router.get("/filter", getFilteredPosts);
 
 export default router;

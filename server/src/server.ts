@@ -10,7 +10,14 @@ const app: express.Application = express();
 const port = 3001;
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // Allow only requests from this origin
+    methods: ["GET", "POST", "PUT"], // Allow specific methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
+    credentials: true,
+  }),
+);
 app.use(bodyParser.json());
 
 app.use("/users", userRouter);

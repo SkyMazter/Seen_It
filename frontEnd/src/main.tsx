@@ -8,30 +8,48 @@ import SignUp from "./Pages/SignUp";
 import { Provider } from "react-redux";
 import { store } from "./state/store";
 import "./style/App.css";
+import PostView from "./Components/PostView";
+import FilteredView from "./Components/FilteredView";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <App />,
+      children: [
+        { path: "/", element: <PostView /> },
+        { path: "/:category", element: <FilteredView /> },
+      ],
+    },
+    {
+      path: "/Login",
+      element: <Login />,
+    },
+    {
+      path: "/Submit",
+      element: <Submit />,
+    },
+    {
+      path: "/SignUp",
+      element: <SignUp />,
+    },
+  ],
   {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "/Login",
-    element: <Login />,
-  },
-  {
-    path: "/Submit",
-    element: <Submit />,
-  },
-  {
-    path: "/SignUp",
-    element: <SignUp />,
-  },
-]);
+    future: {
+      v7_relativeSplatPath: true,
+    },
+  }
+);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <RouterProvider
+        router={router}
+        future={{
+          v7_startTransition: true,
+        }}
+      />
     </React.StrictMode>
-  </Provider>,
+  </Provider>
 );
