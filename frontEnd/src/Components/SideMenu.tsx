@@ -12,15 +12,27 @@ import {
   CiMonitor,
 } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const SideMenu = () => {
+  const [active, setActive] = useState<string>("home");
+
   return (
     <div>
       <Container className="side-menu py-2 my-1">
         <Row>
-          <Col className="side-menu-item">
-            {" "}
-            <Link to="/"> Home</Link>
+          <Col
+            className={
+              active == "home" ? "side-menu-item " + "active" : "side-menu-item"
+            }
+            onClick={() => {
+              setActive("home");
+            }}
+          >
+            <Link to="/" className="w-100">
+              {" "}
+              Home
+            </Link>
           </Col>
         </Row>
         <Row>

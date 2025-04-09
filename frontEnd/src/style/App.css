@@ -45,6 +45,7 @@
     background-color: #f5f7fa;
     transition: 0.3s ease-in-out;
 }
+
 .outer-post {
     border-bottom: lightgray 1px solid;
 }
@@ -64,4 +65,7 @@
 .post:hover {
     background-color: #f5f7fa;
     transition: 0.3s ease-in-out;
+}
+.active {
+    background-color: #f5f7fa;
 }

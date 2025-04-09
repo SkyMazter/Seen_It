@@ -1,6 +1,5 @@
 interface Props {
   title: string;
-  // imgSrc?: string;
   children?: React.ReactNode;
 }
 const DropdownItem = ({ title, children }: Props) => {

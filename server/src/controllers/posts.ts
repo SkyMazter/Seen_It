@@ -126,9 +126,12 @@ const getFilteredPosts = async (
   res: Response,
 ): Promise<Response> => {
   const category: string = req.query.category as string;
+  const n: number = parseInt(req.query.n as string) || 50;
+
   try {
     const posts = await Post.findAll({
       where: { category: category },
+      limit: n,
     });
     return res.json(posts);
   } catch (error) {

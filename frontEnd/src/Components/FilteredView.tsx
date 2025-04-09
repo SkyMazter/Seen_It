@@ -1,9 +1,10 @@
 import { useParams } from "react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Post from "./Post";
+import Button from "react-bootstrap/Button";
 
 interface Posts {
   id: string;
@@ -18,12 +19,14 @@ interface Posts {
 const FilteredView = () => {
   const [show, setShow] = useState<boolean>(false);
   const [posts, setPosts] = useState<Posts[]>([]);
+  const [postCount, setPostCount] = useState<number>(30);
+
   const param = useParams();
 
-  const handleGetFilteredPosts = async () => {
+  const handleGetFilteredPosts = useCallback(async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/posts/filter?category=${param.category}`
+        `http://localhost:3001/posts/filter?category=${param.category}&n=${postCount}`,
       );
       const data = await response.json();
 
@@ -32,14 +35,17 @@ const FilteredView = () => {
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [param, postCount]);
   const style = {
     overflow: "auto",
+  };
+  const handleLoadMore = () => {
+    setPostCount(postCount + 20);
   };
   useEffect(() => {
     handleGetFilteredPosts();
     setShow(true);
-  }, [param]);
+  }, [handleGetFilteredPosts]);
 
   return (
     <div>
@@ -59,6 +65,13 @@ const FilteredView = () => {
                   ></Post>
                 ))
               : ""}
+          </Col>
+        </Row>
+        <Row xs={12}>
+          <Col className="d-flex justify-content-center py-1">
+            <Button variant="light" onClick={handleLoadMore}>
+              Load More
+            </Button>
           </Col>
         </Row>
       </Container>
