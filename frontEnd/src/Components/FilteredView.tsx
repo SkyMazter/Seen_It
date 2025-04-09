@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Post from "./Post";
 import Button from "react-bootstrap/Button";
+import missingLogo from "../assets/missing.png";
 
 interface Posts {
   id: string;
@@ -36,12 +37,15 @@ const FilteredView = () => {
       console.error(error);
     }
   }, [param, postCount]);
+
   const style = {
     overflow: "auto",
   };
+
   const handleLoadMore = () => {
     setPostCount(postCount + 20);
   };
+
   useEffect(() => {
     handleGetFilteredPosts();
     setShow(true);
@@ -69,9 +73,27 @@ const FilteredView = () => {
         </Row>
         <Row xs={12}>
           <Col className="d-flex justify-content-center py-1">
-            <Button variant="light" onClick={handleLoadMore}>
-              Load More
-            </Button>
+            {posts.length == 0 ? (
+              <Container>
+                <Row>
+                  <Col className="d-flex justify-content-center">
+                    <img className="logo" src={missingLogo}></img>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="d-flex justify-content-center">
+                    <h3>
+                      It seems there are no posts for what you are looking for.
+                      Be the first to post!
+                    </h3>
+                  </Col>
+                </Row>
+              </Container>
+            ) : (
+              <Button variant="light" onClick={handleLoadMore}>
+                Load More
+              </Button>
+            )}
           </Col>
         </Row>
       </Container>

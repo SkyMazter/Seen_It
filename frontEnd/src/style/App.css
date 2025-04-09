@@ -13,6 +13,11 @@
     transition: 0.3s;
 }
 
+.side-menu-text {
+    text-decoration: none;
+    color: darkcyan;
+}
+
 .dropdown-closed {
     height: 2rem;
     margin-top: 5px;
@@ -66,6 +71,24 @@
     background-color: #f5f7fa;
     transition: 0.3s ease-in-out;
 }
+
 .active {
     background-color: #f5f7fa;
+}
+
+.logo {
+    height: 350px;
+    width: 350px;
+}
+
+.nav-logo {
+    height: 50px;
+    width: 50px;
+}
+
+.nav-title {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
 }

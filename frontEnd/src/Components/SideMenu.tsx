@@ -11,12 +11,12 @@ import {
   CiWheat,
   CiMonitor,
 } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const SideMenu = () => {
   const [active, setActive] = useState<string>("home");
-
+  const navigate = useNavigate();
   return (
     <div>
       <Container className="side-menu py-2 my-1">
@@ -27,53 +27,54 @@ const SideMenu = () => {
             }
             onClick={() => {
               setActive("home");
+              navigate("/");
             }}
           >
-            <Link to="/" className="w-100">
+            <Link to="/" className="side-menu-text">
               {" "}
               Home
             </Link>
           </Col>
         </Row>
         <Row>
-          <Col className="side-menu-item">Popular</Col>
+          <Col className="side-menu-item side-menu-text">Popular</Col>
         </Row>
         <Row>
-          <Col className="side-menu-item">Search?</Col>
+          <Col className="side-menu-item side-menu-text">Search?</Col>
         </Row>
         <Row></Row>
       </Container>
 
       <Dropdown title="Categories" openOnLoad={true}>
-        <Link to="/mapping">
+        <Link to="/mapping" className="side-menu-text">
           <DropdownItem title="Mapping">
             {/* icon */}
             <CiMap />
           </DropdownItem>
         </Link>
 
-        <Link to="/networking">
+        <Link to="/networking" className="side-menu-text">
           <DropdownItem title="Networking">
             {/* icon */}
             <CiRouter />
           </DropdownItem>
         </Link>
 
-        <Link to="/software">
+        <Link to="/software" className="side-menu-text">
           <DropdownItem title="Software">
             {/* icon */}
             <CiUsb />
           </DropdownItem>
         </Link>
 
-        <Link to="health">
+        <Link to="health" className="side-menu-text">
           <DropdownItem title="Health">
             {/* icon */}
             <CiMedicalCross />
           </DropdownItem>
         </Link>
 
-        <Link to="environmental">
+        <Link to="environmental" className="side-menu-text">
           {" "}
           <DropdownItem title="Environmental">
             {/* icon */}
@@ -81,7 +82,7 @@ const SideMenu = () => {
           </DropdownItem>
         </Link>
 
-        <Link to="entertainment">
+        <Link to="entertainment" className="side-menu-text">
           {" "}
           <DropdownItem title="Entertainment">
             {/* icon */}

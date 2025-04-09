@@ -9,6 +9,7 @@ import { CiMenuBurger, CiCirclePlus } from "react-icons/ci";
 import { useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import SideMenu from "./SideMenu";
+import logo from "../assets/logo.png";
 
 const NavBar = () => {
   const logged_in: boolean = useAppSelector((state) => state.login.isActive);
@@ -33,7 +34,9 @@ const NavBar = () => {
             >
               <CiMenuBurger />
             </Button>
-            PNKArchive
+
+            <img src={logo} className="nav-logo" />
+            <p className="nav-title">Seen.it</p>
           </Col>
 
           <Col className="d-flex align-items-center justify-content-end">
