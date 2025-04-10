@@ -11,7 +11,7 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <Container fluid style={{ height: "93vh" }}>
+      <Container fluid style={{ height: "90vh" }}>
         <Row>
           <Col
             lg={2}
@@ -19,7 +19,7 @@ const App = () => {
           >
             <SideMenu />
           </Col>
-          <Col style={{ height: "93vh", overflow: "scroll" }}>
+          <Col style={{ height: "90vh", overflow: "scroll" }}>
             {/* <PostView /> */}
             <Outlet />
           </Col>
