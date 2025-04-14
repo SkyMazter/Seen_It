@@ -23,7 +23,11 @@ const NavBar = () => {
     setShow(false);
   };
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "#f7f7fb",
+      }}
+    >
       <Container fluid className="py-2 border-bottom border-secondary-subtle">
         <Row className="d-flex align-items-center">
           <Col className="d-flex align-items-center justify-content-start">
@@ -42,7 +46,7 @@ const NavBar = () => {
           <Col className="d-flex align-items-center justify-content-end">
             <LoginStatus isLoggedIn={logged_in} />
             <Link to="/Submit" className={logged_in ? "d-show ms-3" : "d-none"}>
-              <Button variant="light">
+              <Button variant="outline-dark">
                 <CiCirclePlus />
               </Button>
             </Link>

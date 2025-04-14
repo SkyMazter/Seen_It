@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
+import Modal from "react-bootstrap/Modal";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks/hooks";
@@ -21,7 +22,12 @@ const Submit = () => {
     description: "",
   });
   const [file, setFile] = useState<File | null>(null);
+  const [show, setShow] = useState<boolean>(false);
 
+  const handleShow = () => {
+    if (show) setShow(false);
+    else setShow(true);
+  };
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -64,8 +70,9 @@ const Submit = () => {
         alert("File uploaded successfully!");
         navigate("/");
       } else {
-        alert("File upload failed!");
+        // alert("File upload failed!");
         console.error("Error uploading file:", postData);
+        handleShow();
       }
     } catch (error) {
       console.error("Error uploading file:", error);
@@ -165,6 +172,11 @@ const Submit = () => {
           </Link>
         </Col>
       </Row>
+
+      <Modal size="sm" show={show} onHide={handleShow}>
+        {" "}
+        <p>hello </p>
+      </Modal>
     </Container>
   );
 };

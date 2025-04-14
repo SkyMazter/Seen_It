@@ -11,7 +11,7 @@ const LoginStatus = ({ isLoggedIn }: Props) => {
   if (isLoggedIn == false)
     return (
       <Link to="/Login">
-        <Button variant={"light"}>Login</Button>
+        <Button variant={"outline-dark"}>Login</Button>
       </Link>
     );
   return <Navbar.Text>@{currentUsrn}</Navbar.Text>;
