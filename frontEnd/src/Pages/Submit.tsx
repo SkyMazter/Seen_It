@@ -23,6 +23,7 @@ const Submit = () => {
   });
   const [file, setFile] = useState<File | null>(null);
   const [show, setShow] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleShow = () => {
     if (show) setShow(false);
@@ -54,7 +55,8 @@ const Submit = () => {
     postData.append("description", formData.description);
 
     if (!file) {
-      alert("Please select a file");
+      setErrorMessage("There is no file attached, Please attach a file!");
+      handleShow();
       return;
     } else {
       postData.append("file", file);
@@ -70,7 +72,7 @@ const Submit = () => {
         alert("File uploaded successfully!");
         navigate("/");
       } else {
-        // alert("File upload failed!");
+        setErrorMessage("File upload failed due to missing information!");
         console.error("Error uploading file:", postData);
         handleShow();
       }
@@ -159,23 +161,23 @@ const Submit = () => {
           </Form>
         </Col>
       </Row>
-      <Row className="h-auto py-2 justify-content-evenly">
-        <Col xs={3} md={1}>
+      <Row className="h-auto py-2 ">
+        <Col className="d-flex justify-content-start align-items-center">
           <Button variant="success" type="submit" onClick={handleSubmit}>
             Submit
           </Button>
-        </Col>
-
-        <Col xs={3} md={1}>
           <Link to="/">
-            <Button variant={"outline-danger"}>Cancel</Button>
+            <Button variant={"outline-danger"} className="ms-3">
+              Cancel
+            </Button>
           </Link>
         </Col>
       </Row>
 
-      <Modal size="sm" show={show} onHide={handleShow}>
-        {" "}
-        <p>hello </p>
+      <Modal size="lg" show={show} onHide={handleShow} centered>
+        <div className="bg-danger-subtle rounded-2">
+          <h3 className="p-3 text-center m-3">{errorMessage}</h3>
+        </div>
       </Modal>
     </Container>
   );
