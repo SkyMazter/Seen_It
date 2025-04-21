@@ -15,7 +15,7 @@
 
 .side-menu-text {
     text-decoration: none;
-    color: darkcyan;
+    color: black;
 }
 
 .dropdown-closed {
@@ -25,6 +25,7 @@
     overflow: hidden;
     border-bottom: lightgray 1px solid;
 }
+
 .dropdown-open {
     height: 16rem;
     margin-top: 5px;
@@ -35,13 +36,16 @@
     font-size: 16px;
     font-weight: 500;
 }
+
 .dropdown-icon-rotate {
     transform: rotate(180deg);
     transition: transform 0.3s ease-in-out;
 }
+
 .dropdown-icon-center {
     transition: transform 0.3s ease-in-out;
 }
+
 .dropdown-item {
     border-radius: 0.4rem;
 }
@@ -54,6 +58,7 @@
 .outer-post {
     border-bottom: lightgray 1px solid;
 }
+
 .post {
     border-radius: 0.4rem;
 }

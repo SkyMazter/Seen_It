@@ -3,6 +3,8 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Dropdown from "./Dropdown";
 import DropdownItem from "./DropdownItem";
+import Modal from "react-bootstrap/Modal";
+
 import {
   CiMap,
   CiRouter,
@@ -16,7 +18,13 @@ import { useState } from "react";
 
 const SideMenu = () => {
   const [active, setActive] = useState<string>("home");
+  const [showSearch, setShowSearch] = useState<boolean>(false);
+
   const navigate = useNavigate();
+
+  const handleSearch = () => {
+    setShowSearch(!showSearch);
+  };
   return (
     <div>
       <Container className="side-menu py-2 my-1">
@@ -31,7 +39,6 @@ const SideMenu = () => {
             }}
           >
             <Link to="/" className="side-menu-text">
-              {" "}
               Home
             </Link>
           </Col>
@@ -40,7 +47,9 @@ const SideMenu = () => {
           <Col className="side-menu-item side-menu-text">Popular</Col>
         </Row>
         <Row>
-          <Col className="side-menu-item side-menu-text">Search?</Col>
+          <Col className="side-menu-item side-menu-text" onClick={handleSearch}>
+            Search
+          </Col>
         </Row>
         <Row></Row>
       </Container>
@@ -91,6 +100,27 @@ const SideMenu = () => {
         </Link>
       </Dropdown>
       <Dropdown title="Other"></Dropdown>
+
+      <Modal size="lg" show={showSearch} onHide={handleSearch} centered>
+        <div
+          className="d-flex"
+          style={{
+            padding: "1rem",
+          }}
+        >
+          <input
+            type="text"
+            placeholder="What are you looking for?"
+            style={{
+              width: "100%",
+              padding: "0.5rem",
+            }}
+          />
+          <button type="submit" onClick={handleSearch}>
+            Go
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };
