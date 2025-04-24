@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Post from "../models/posts";
+import { Op } from "sequelize";
 
 interface PostStruct {
   userId: number;
@@ -140,4 +141,33 @@ const getFilteredPosts = async (
   }
 };
 
-export { newPost, getAllPosts, getLastPosts, getFilteredPosts };
+const getSearchResult = async (
+  req: Request,
+  res: Response,
+): Promise<Response> => {
+  const search: string = req.query.search as string;
+
+  try {
+    const posts = await Post.findAll({
+      where: {
+        [Op.or]: [
+          { title: { [Op.like]: `%${search}%` } },
+          { description: { [Op.like]: `%${search}%` } },
+        ],
+      },
+    });
+
+    return res.json(posts);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+export {
+  newPost,
+  getAllPosts,
+  getLastPosts,
+  getFilteredPosts,
+  getSearchResult,
+};

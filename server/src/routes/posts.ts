@@ -4,6 +4,7 @@ import {
   getAllPosts,
   getLastPosts,
   getFilteredPosts,
+  getSearchResult,
 } from "../controllers/posts";
 import multer from "multer";
 
@@ -23,5 +24,6 @@ router.post("/new", upload.single("file"), newPost);
 router.get("/all", getAllPosts);
 router.get("/last", getLastPosts);
 router.get("/filter", getFilteredPosts);
+router.get("/search", getSearchResult);
 
 export default router;
