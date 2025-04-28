@@ -29,9 +29,9 @@ fi
 
 # Check and setup database
 echo -e "\n${YELLOW}Checking if database exists...${NC}"
-DB_NAME="my_application"
-DB_USER="app_user"
-DB_PASS="secure_password" # You should change this
+DB_NAME="database"
+DB_USER="root"
+DB_PASS="rootdb@server" # You should change this
 if command_exists mysql; then
   # Check if database exists
   DB_EXISTS=$(sudo mysql -e "SHOW DATABASES LIKE '$DB_NAME';" | grep -o "$DB_NAME")
