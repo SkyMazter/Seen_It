@@ -130,9 +130,19 @@ DB_PASSWORD=$DBPASSWORD
 DB_HOST=127.0.0.1
 DB_USER=$DB_USER
 DB_PORT=3306
+EOF
 
 mkdir -p "$TARGET_DIR"
 
 mv "$ENV_FILE" "$TARGET_DIR/"
 
 echo "===== .env file created and moved to its target directory ====="
+
+npm install --prefix "$(pwd)/frontEnd"
+npm install --prefix "$(pwd)/server"
+
+npm run build --prefix "$(pwd)/frontEnd/"
+
+sudo mv "$(pwd)/frontEnd/dist/*" /var/www/html/
+
+sudo systemctl restart apache2
