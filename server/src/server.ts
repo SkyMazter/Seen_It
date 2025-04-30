@@ -5,6 +5,7 @@ import postRouter from "./routes/posts";
 import bodyParser from "body-parser";
 import cors from "cors";
 import { sequelize } from "./models";
+import "dotenv/config";
 
 const app: express.Application = express();
 const port = 3001;
@@ -12,10 +13,9 @@ const port = 3001;
 app.use(express.json());
 app.use(
   cors({
-    origin: "*", // Allow only requests from this origin
+    origin: process.env.APP_URL, // Allow only requests from this origin
     methods: ["GET", "POST", "PUT"], // Allow specific methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
-    credentials: true,
   }),
 );
 app.use(bodyParser.json());
