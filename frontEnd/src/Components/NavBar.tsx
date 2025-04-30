@@ -59,7 +59,13 @@ const NavBar = () => {
           <Offcanvas.Title>Menu</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <SideMenu />
+          <SideMenu
+            onHide={() => {
+              if (show == true) {
+                setShow(false);
+              }
+            }}
+          />
         </Offcanvas.Body>
       </Offcanvas>
     </div>

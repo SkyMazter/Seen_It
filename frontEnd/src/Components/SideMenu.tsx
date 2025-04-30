@@ -16,7 +16,11 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const SideMenu = () => {
+interface props {
+  onHide?: () => void;
+}
+
+const SideMenu = ({ onHide }: props) => {
   const [active, setActive] = useState<string>("home");
   const [showSearch, setShowSearch] = useState<boolean>(false);
   // const [input, setInput] = useState<string>("");
@@ -42,7 +46,7 @@ const SideMenu = () => {
               navigate("/");
             }}
           >
-            <Link to="/" className="side-menu-text">
+            <Link to="/" className="side-menu-text" onClick={onHide}>
               Home
             </Link>
           </Col>
@@ -62,35 +66,35 @@ const SideMenu = () => {
       </Container>
 
       <Dropdown title="Categories" openOnLoad={true}>
-        <Link to="/mapping" className="side-menu-text">
+        <Link to="/mapping" className="side-menu-text" onClick={onHide}>
           <DropdownItem title="Mapping">
             {/* icon */}
             <CiMap />
           </DropdownItem>
         </Link>
 
-        <Link to="/networking" className="side-menu-text">
+        <Link to="/networking" className="side-menu-text" onClick={onHide}>
           <DropdownItem title="Networking">
             {/* icon */}
             <CiRouter />
           </DropdownItem>
         </Link>
 
-        <Link to="/software" className="side-menu-text">
+        <Link to="/software" className="side-menu-text" onClick={onHide}>
           <DropdownItem title="Software">
             {/* icon */}
             <CiUsb />
           </DropdownItem>
         </Link>
 
-        <Link to="health" className="side-menu-text">
+        <Link to="health" className="side-menu-text" onClick={onHide}>
           <DropdownItem title="Health">
             {/* icon */}
             <CiMedicalCross />
           </DropdownItem>
         </Link>
 
-        <Link to="environmental" className="side-menu-text">
+        <Link to="environmental" className="side-menu-text" onClick={onHide}>
           {" "}
           <DropdownItem title="Environmental">
             {/* icon */}
@@ -98,7 +102,7 @@ const SideMenu = () => {
           </DropdownItem>
         </Link>
 
-        <Link to="entertainment" className="side-menu-text">
+        <Link to="entertainment" className="side-menu-text" onClick={onHide}>
           {" "}
           <DropdownItem title="Entertainment">
             {/* icon */}

@@ -18,6 +18,8 @@ interface loginData {
 }
 
 const Login = () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -46,7 +48,7 @@ const Login = () => {
 
   const callLogin = async () => {
     try {
-      const response = await fetch("http://localhost:3001/users/login", {
+      const response = await fetch(`${apiUrl}/users/login`, {
         method: "POST",
         mode: "cors",
         headers: {

@@ -16,6 +16,8 @@ interface Posts {
 }
 
 const PostView = () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const [posts, setPosts] = useState<Posts[]>([]);
   const [show, setShow] = useState<boolean>(false);
   const [postCount, setPostCount] = useState<number>(30);
@@ -26,15 +28,13 @@ const PostView = () => {
 
   const handleGetPosts = useCallback(async () => {
     try {
-      const response = await fetch(
-        `http://localhost:3001/posts/last?n=${postCount}`,
-      );
+      const response = await fetch(`${apiUrl}/posts/last?n=${postCount}`);
       const data = await response.json();
       setPosts(data);
     } catch (error) {
       console.error(error);
     }
-  }, [postCount]);
+  }, [postCount, apiUrl]);
 
   const handleLoadMore = () => {
     setPostCount(postCount + 20);

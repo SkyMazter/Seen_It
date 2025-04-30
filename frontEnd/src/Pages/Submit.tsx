@@ -11,6 +11,8 @@ import { useAppSelector } from "../hooks/hooks";
 import { useState } from "react";
 
 const Submit = () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const currentUsrn: string = useAppSelector((state) => state.user.username);
   const currentUsrId: number = useAppSelector((state) => state.user.user_id);
   const navigate = useNavigate();
@@ -63,7 +65,7 @@ const Submit = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/posts/new", {
+      const response = await fetch(`${apiUrl}/posts/new`, {
         method: "POST",
         body: postData,
       });

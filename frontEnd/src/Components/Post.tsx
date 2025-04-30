@@ -22,8 +22,10 @@ const Post = ({
   fileName,
   filePath,
 }: Props) => {
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const handlePreview = () => {
-    const downloadUrl = `http://localhost:3001${filePath}`; // Construct the file URL
+    const downloadUrl = `${apiUrl}` + `${filePath}`; // Construct the file URL
     console.log(downloadUrl);
     const link = document.createElement("a");
     link.href = downloadUrl;
@@ -34,7 +36,7 @@ const Post = ({
   };
   const handleDownload = async () => {
     try {
-      const downloadUrl = `http://localhost:3001${filePath}`; // Construct the file URL
+      const downloadUrl = `${apiUrl}` + `${filePath}`; // Construct the file URL
       console.log(downloadUrl);
       // Fetch the file as a Blob
       const response = await fetch(downloadUrl);

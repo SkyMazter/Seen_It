@@ -17,6 +17,8 @@ interface signUpFormat {
 }
 
 const SignUp = () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState<signUpFormat>({
@@ -57,7 +59,7 @@ const SignUp = () => {
   };
   const callSignUp = async () => {
     try {
-      const response = await fetch("http://localhost:3001/users/signup", {
+      const response = await fetch(`${apiUrl}/users/signup`, {
         method: "POST",
         mode: "cors",
         headers: {

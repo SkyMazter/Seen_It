@@ -18,6 +18,7 @@ interface Posts {
 }
 
 const FilteredView = () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [show, setShow] = useState<boolean>(false);
   const [posts, setPosts] = useState<Posts[]>([]);
   const [postCount, setPostCount] = useState<number>(30);
@@ -27,7 +28,7 @@ const FilteredView = () => {
   const handleGetFilteredPosts = useCallback(async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/posts/filter?category=${param.category}&n=${postCount}`,
+        `${apiUrl}/posts/filter?category=${param.category}&n=${postCount}`,
       );
       const data = await response.json();
 
@@ -36,7 +37,7 @@ const FilteredView = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [param, postCount]);
+  }, [param, postCount, apiUrl]);
 
   const style = {
     overflow: "auto",

@@ -35,7 +35,7 @@ echo "===== Please Set the Parameters for your Database ====="
 read -s -p "Enter the password for your database" DB_PASSWORD
 echo
 
-DB_NAME="database"
+DB_NAME="seenit_db"
 DB_USER="seenit"
 
 
@@ -119,9 +119,10 @@ echo -e "npm: $(command_exists npm && echo "Installed ($(npm -v))" || echo "Not 
 echo -e "Apache: $(command_exists apache2 && echo "Installed" || echo "Not installed")"
 
 echo "===== Dependancy Installation Complete: Now Installing Application ====="
-
+echo "===== Creating Server .env File ====="
 ENV_FILE=".env"
 TARGET_DIR="$(pwd)/server"
+HOSTNAME=$(hostname)
 
 cat > "$ENV_FILE" << EOF
 #Environment Variables
@@ -129,7 +130,8 @@ DB_NAME=$DB_NAME
 DB_PASSWORD=$DBPASSWORD
 DB_HOST=127.0.0.1
 DB_USER=$DB_USER
-DB_PORT=3306
+DB_PORT=3001
+APP_URL=http://$HOSTNAME
 EOF
 
 mkdir -p "$TARGET_DIR"
@@ -137,7 +139,20 @@ mkdir -p "$TARGET_DIR"
 mv "$ENV_FILE" "$TARGET_DIR/"
 
 echo "===== .env file created and moved to its target directory ====="
+echo "===== Creating Front End .env File ====="
 
+ENV_FILE=".env"
+TARGET_DIR="$(pwd)/frontEnd"
+HOSTNAME=$(hostname)
+
+cat > "$ENV_FILE" << EOF
+#Environment Variables
+VITE_API_URL=http://$HOSTNAME:3001
+EOF
+
+mkdir -p "$TARGET_DIR"
+
+mv "$ENV_FILE" "$TARGET_DIR/"
 npm install --prefix "$(pwd)/frontEnd"
 npm install --prefix "$(pwd)/server"
 
@@ -146,3 +161,9 @@ npm run build --prefix "$(pwd)/frontEnd/"
 sudo mv "$(pwd)/frontEnd/dist/*" /var/www/html/
 
 sudo systemctl restart apache2
+
+mkdir "$(pwd)/server/uploads"
+
+npm run start --prefix "$(pwd)/server"
+
+echo "===== Installation Complete! ====="
