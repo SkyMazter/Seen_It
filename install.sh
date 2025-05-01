@@ -32,7 +32,7 @@ echo -e "\n${YELLOW}Checking if database exists...${NC}"
 
 echo "===== Please Set the Parameters for your Database ====="
 
-read -s -p "Enter the password for your database" DB_PASSWORD
+read -s -p "Enter the password for your database: " DB_PASSWORD
 echo
 
 DB_NAME="seenit_db"
@@ -123,7 +123,6 @@ echo "===== Creating Server .env File ====="
 ENV_FILE=".env"
 TARGET_DIR="$(pwd)/server"
 HOSTNAME=$(hostname)
-IP_ADDR=hostname -I | awk '{print $1}'
 
 cat > "$ENV_FILE" << EOF
 #Environment Variables
@@ -134,8 +133,6 @@ DB_USER=$DB_USER
 DB_PORT=3306
 APP_URL=http://$HOSTNAME
 APP_URL_2=$HOSTNAME.local
-APP_URL_3=http://$IP_ADDR
-APP_URL_4=$IP_ADDR.local
 EOF
 
 mkdir -p "$TARGET_DIR"
@@ -161,6 +158,8 @@ npm install --prefix "$(pwd)/frontEnd"
 npm install --prefix "$(pwd)/server"
 
 npm run build --prefix "$(pwd)/frontEnd/"
+
+sudo rm -rf /var/www/html/*
 
 sudo mv $(pwd)/frontEnd/dist/* /var/www/html/
 
