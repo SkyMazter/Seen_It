@@ -168,6 +168,69 @@ sudo systemctl restart apache2
 
 mkdir "$(pwd)/server/uploads"
 
-npm run start --prefix "$(pwd)/server"
+SERVICE_NAME="seenit"
+SERVICE_FILE="/etc/systemd/system/$SERVICE_NAME.service"
+NODE_PATH=$(which node)
+USER_NAME=$(whoami)
+APP_DIR="/home/$USER_NAME/server"
+TS_ENTRY="$APP_DIR/src/server.ts"
+JS_ENTRY="$APP_DIR/dist/server.js"
 
+# === Pre-checks ===
+if [ "$EUID" -ne 0 ]; then
+  echo "❌ Please run this script with sudo:"
+  echo "   sudo $0"
+  exit 1
+fi
+
+if [ ! -f "$TS_ENTRY" ]; then
+  echo "❌ Cannot find TypeScript entry file at $TS_ENTRY"
+  exit 1
+fi
+
+if [ -z "$NODE_PATH" ]; then
+  echo "❌ Node.js is not installed. Please install it first."
+  exit 1
+fi
+
+# === Install dependencies (tsc) ===
+echo "📦 Installing TypeScript if needed..."
+cd "$APP_DIR"
+npm install --silent
+
+# === Compile TypeScript ===
+echo "🛠️  Compiling TypeScript..."
+npx tsc
+if [ $? -ne 0 ]; then
+  echo "❌ TypeScript compilation failed"
+  exit 1
+fi
+
+# === Create systemd service file ===
+echo "📝 Creating systemd service file at $SERVICE_FILE..."
+cat <<EOF | sudo tee $SERVICE_FILE > /dev/null
+[Unit]
+Description=TypeScript Node.js Server
+After=network.target
+
+[Service]
+ExecStart=$NODE_PATH $JS_ENTRY
+WorkingDirectory=$APP_DIR
+Restart=always
+User=$USER_NAME
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# === Reload and enable service ===
+echo "🔄 Reloading systemd and enabling service..."
+sudo systemctl daemon-reload
+sudo systemctl enable $SERVICE_NAME
+sudo systemctl start $SERVICE_NAME
+
+# === Show status ===
+echo "✅ Service '$SERVICE_NAME' started!"
+sudo systemctl status $SERVICE_NAME --no-pager
 echo "===== Installation Complete! ====="
