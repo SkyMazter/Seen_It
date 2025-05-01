@@ -9,13 +9,17 @@ import "dotenv/config";
 
 const app: express.Application = express();
 const port = 3001;
-
+const origins: string[] = [
+  String(process.env.APP_URL),
+  String(process.env.APP_URL_2),
+];
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.APP_URL, // Allow only requests from this origin
+    origin: [String(process.env.APP_URL), String(process.env.APP_URL_2)], // Allow only requests from this origin
     methods: ["GET", "POST", "PUT"], // Allow specific methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
+    credentials: true,
   }),
 );
 app.use(bodyParser.json());
