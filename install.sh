@@ -171,7 +171,7 @@ SERVICE_NAME="seenit"
 SERVICE_FILE="/etc/systemd/system/$SERVICE_NAME.service"
 NODE_PATH=$(which node)
 USER_NAME=$(whoami)
-APP_DIR="/home/$USER_NAME/server"
+APP_DIR="$(pwd)/server"
 TS_ENTRY="$APP_DIR/src/server.ts"
 JS_ENTRY="$APP_DIR/dist/server.js"
 
