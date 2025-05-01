@@ -123,6 +123,7 @@ echo "===== Creating Server .env File ====="
 ENV_FILE=".env"
 TARGET_DIR="$(pwd)/server"
 HOSTNAME=$(hostname)
+IP_ADDR=hostname -I | awk '{print $1}'
 
 cat > "$ENV_FILE" << EOF
 #Environment Variables
@@ -132,6 +133,9 @@ DB_HOST=127.0.0.1
 DB_USER=$DB_USER
 DB_PORT=3306
 APP_URL=http://$HOSTNAME
+APP_URL_2=$HOSTNAME.local
+APP_URL_3=http://$IP_ADDR
+APP_URL_4=$IP_ADDR.local
 EOF
 
 mkdir -p "$TARGET_DIR"
@@ -158,7 +162,7 @@ npm install --prefix "$(pwd)/server"
 
 npm run build --prefix "$(pwd)/frontEnd/"
 
-sudo mv "$(pwd)/frontEnd/dist/*" /var/www/html/
+sudo mv $(pwd)/frontEnd/dist/* /var/www/html/
 
 sudo systemctl restart apache2
 
