@@ -20,3 +20,4 @@ Currently this application is only compatible with raspberry pi 4/5 running on t
 
 1. Raspberry Pi 4 or 5
 2. SD Card (8GB min, 16GB recommended)
+3. A computer with the Raspberry Pi Imager (<a href="https://www.raspberrypi.com/software/">Link Here</a>)
