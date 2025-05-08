@@ -10,6 +10,8 @@
 
 This is a application made for the raspberry pi to serve as an archiving app. Allowing users to create accounts, upload, and download files. It also provides a user-friendly interface for navigating user submitted content. This application is meant to serve on a private local network. This application was designed was designed with the Portable Network Kit server. For more informarion visit: <a href="communitytechlab.org">Community Tech Lab Website</a>
 
+(This project is currnetly a Minimum viable project (MVP) and is not feature complete)
+
 ## <a name="#compatibility"> Compatibility </a>
 
 Currently this application is only compatible with raspberry pi 4/5 running on the 64bit operating system.
@@ -35,8 +37,36 @@ After installing and opening the Imager on your computer, click on choose OS and
 
 After you have preconfigured your settings you can continue with the writing process. Once the OS is done being written, you can insert the SD card into the Raspberry Pi and remote into is using SSH.
 
-After logging into the Pi, update the system
+After logging into the Pi, update the system.
 
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
+
+Install Git.
+
+```bash
+sudo apt install git -y
+```
+
+Navigate into the project directory.
+
+```bash
+cd Seen_It
+```
+
+Change the persmission of install.sh.
+
+```bash
+sudo chmod +x install.sh
+```
+
+Execute the install script as an admin/SuperUser.
+
+```bash
+sudo ./install.sh
+```
+
+This is required so that the server becomes a service on the Raspberry Pi, ensuring it runs on wakeup.
+
+After the script is done running, you should now be able to use the application over the local network. Open your browser and navigate to your server by typing in your hostname like so http://myHostName.
