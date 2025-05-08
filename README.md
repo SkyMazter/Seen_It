@@ -69,6 +69,8 @@ sudo ./install.sh
 
 This is required so that the server becomes a service on the Raspberry Pi, ensuring it runs on wakeup.
 
-#### Note that you will be prompted through out the installation process for you to set and choose root paswords. You will be responsible for maintaining and securing these passwords.
+#### Note:
+
+You will be prompted through out the installation process for you to set and choose root paswords. You will be responsible for maintaining and securing these passwords.
 
 After the script is done running, you should now be able to use the application over the local network. Open your browser and navigate to your server by typing in your hostname like so http://myHostName.
