@@ -34,3 +34,9 @@ After installing and opening the Imager on your computer, click on choose OS and
 - wifi settings
 
 After you have preconfigured your settings you can continue with the writing process. Once the OS is done being written, you can insert the SD card into the Raspberry Pi and remote into is using SSH.
+
+After logging into the Pi, update the system
+
+```bash
+sudo apt update && sudo apt upgrade -y
+```
