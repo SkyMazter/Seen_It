@@ -11,45 +11,33 @@ import "./style/App.css";
 import PostView from "./Components/PostView";
 import FilteredView from "./Components/FilteredView";
 
-const router = createBrowserRouter(
-  [
-    {
-      path: "/",
-      element: <App />,
-      children: [
-        { path: "/", element: <PostView /> },
-        { path: "/:category", element: <FilteredView /> },
-      ],
-    },
-    {
-      path: "/Login",
-      element: <Login />,
-    },
-    {
-      path: "/Submit",
-      element: <Submit />,
-    },
-    {
-      path: "/SignUp",
-      element: <SignUp />,
-    },
-  ],
+const router = createBrowserRouter([
   {
-    future: {
-      v7_relativeSplatPath: true,
-    },
-  }
-);
+    path: "/",
+    element: <App />,
+    children: [
+      { path: "/", element: <PostView /> },
+      { path: "/:category", element: <FilteredView /> },
+    ],
+  },
+  {
+    path: "/Login",
+    element: <Login />,
+  },
+  {
+    path: "/Submit",
+    element: <Submit />,
+  },
+  {
+    path: "/SignUp",
+    element: <SignUp />,
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <React.StrictMode>
-      <RouterProvider
-        router={router}
-        future={{
-          v7_startTransition: true,
-        }}
-      />
+      <RouterProvider router={router} />
     </React.StrictMode>
-  </Provider>
+  </Provider>,
 );
