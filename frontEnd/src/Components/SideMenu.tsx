@@ -31,7 +31,9 @@ const SideMenu = ({ onHide }: props) => {
     setShowSearch(!showSearch);
   };
 
-  // const handleInput = (event: React.EventHandler<HTMLImageElement>): void => {};
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setInput(e.target.value);
+  };
 
   return (
     <div>
@@ -126,14 +128,12 @@ const SideMenu = ({ onHide }: props) => {
               width: "100%",
               padding: "0.5rem",
             }}
+            onChange={handleInput}
           />
-          <button
-            type="submit"
-            onClick={() => {
-              handleShowSearch();
-              navigate("/search?");
-            }}
-          >
+          <button type="submit" onClick={ ()=>{
+            navigate(`/${input}`)
+            handleShowSearch()
+          }}>
             Go
           </button>
         </div>

@@ -9,14 +9,11 @@ import "dotenv/config";
 
 const app: express.Application = express();
 const port = 3001;
-const origins: string[] = [
-  String(process.env.APP_URL),
-  String(process.env.APP_URL_2),
-];
+const origins= process.env.APP_URL;
 app.use(express.json());
 app.use(
   cors({
-    origin: [String(process.env.APP_URL), String(process.env.APP_URL_2)], // Allow only requests from this origin
+    origin: origins,// Allow only requests from this origin
     methods: ["GET", "POST", "PUT"], // Allow specific methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
     credentials: true,
