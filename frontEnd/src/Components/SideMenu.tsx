@@ -23,7 +23,7 @@ interface props {
 const SideMenu = ({ onHide }: props) => {
   const [active, setActive] = useState<string>("home");
   const [showSearch, setShowSearch] = useState<boolean>(false);
-  // const [input, setInput] = useState<string>("");
+  const [input, setInput] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ const SideMenu = ({ onHide }: props) => {
     setShowSearch(!showSearch);
   };
 
-  // const handleInput = (): void => {};
+  // const handleInput = (event: React.EventHandler<HTMLImageElement>): void => {};
 
   return (
     <div>
@@ -127,7 +127,13 @@ const SideMenu = ({ onHide }: props) => {
               padding: "0.5rem",
             }}
           />
-          <button type="submit" onClick={handleShowSearch}>
+          <button
+            type="submit"
+            onClick={() => {
+              handleShowSearch();
+              navigate("/search?");
+            }}
+          >
             Go
           </button>
         </div>

@@ -39,6 +39,20 @@ const FilteredView = () => {
     }
   }, [param, postCount, apiUrl]);
 
+  const handleSearchResults = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `${apiUrl}/posts/search?search=${param.category}`,
+      );
+      const data = await response.json();
+
+      setPosts(data);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }, [param, apiUrl]);
+
   const style = {
     overflow: "auto",
   };
@@ -48,9 +62,37 @@ const FilteredView = () => {
   };
 
   useEffect(() => {
-    handleGetFilteredPosts();
-    setShow(true);
-  }, [handleGetFilteredPosts]);
+    switch (param.category) {
+      case "networking":
+        handleGetFilteredPosts();
+        setShow(true);
+        break;
+      case "entertainment":
+        handleGetFilteredPosts();
+        setShow(true);
+        break;
+      case "health":
+        handleGetFilteredPosts();
+        setShow(true);
+        break;
+      case "environmental":
+        handleGetFilteredPosts();
+        setShow(true);
+        break;
+      case "mapping":
+        handleGetFilteredPosts();
+        setShow(true);
+        break;
+      case "software":
+        handleGetFilteredPosts();
+        setShow(true);
+        break;
+
+      default:
+        handleSearchResults();
+        setShow(true);
+    }
+  }, [handleGetFilteredPosts, handleSearchResults, param]);
 
   return (
     <div>
