@@ -8,7 +8,7 @@
 
 ## <a name="#overview"> Overview </a>
 
-This is a application made for the raspberry pi to serve as an archiving app. Allowing users to create accounts, upload, and download files. It also provides a user-friendly interface for navigating user submitted content. This application is meant to serve on a private local network. This application was designed was designed with the Portable Network Kit server. For more informarion visit: <a href="communitytechlab.org">Community Tech Lab Website</a>
+This is a application made for the raspberry pi to serve as an archiving app. Allowing users to create accounts, upload, and download files. It also provides a user-friendly interface for navigating user submitted content. This application is meant to serve on a private local network. This application was designed to be hosted on the Portable Network Kit server. However as of right now it is only meant to run on a fresh install of Raspberry Pi OS. For more informarion visit: <a href="communitytechlab.org">Community Tech Lab Website</a>
 
 (This project is currnetly a Minimum viable project (MVP) and is not feature complete)
 
