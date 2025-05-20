@@ -1,99 +1,130 @@
 .side-menu {
-    border-bottom: lightgray solid 1px;
+  border-bottom: lightgray solid 1px;
 }
 
 .side-menu-item {
-    margin-top: 0.3rem;
-    border-radius: 0.4rem;
-    padding: 0.5rem;
+  margin-top: 0.3rem;
+  border-radius: 0.4rem;
+  padding: 0.5rem;
 }
 
 .side-menu-item:hover {
-    background-color: #f5f7fa;
-    transition: 0.3s;
+  background-color: #f5f7fa;
+  transition: 0.3s;
 }
 
 .side-menu-text {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
 .dropdown-closed {
-    height: 2rem;
-    margin-top: 5px;
-    transition: 0.3s;
-    overflow: hidden;
-    border-bottom: lightgray 1px solid;
+  height: 2rem;
+  margin-top: 5px;
+  transition: 0.3s;
+  overflow: hidden;
+  border-bottom: lightgray 1px solid;
 }
 
 .dropdown-open {
-    height: 16rem;
-    margin-top: 5px;
-    transition: 0.3s;
-    border-bottom: lightgray 1px solid;
+  height: 16rem;
+  margin-top: 5px;
+  transition: 0.3s;
+  border-bottom: lightgray 1px solid;
 }
 .dropdown-title {
-    font-size: 16px;
-    font-weight: 500;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .dropdown-icon-rotate {
-    transform: rotate(180deg);
-    transition: transform 0.3s ease-in-out;
+  transform: rotate(180deg);
+  transition: transform 0.3s ease-in-out;
 }
 
 .dropdown-icon-center {
-    transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 .dropdown-item {
-    border-radius: 0.4rem;
+  border-radius: 0.4rem;
 }
 
 .dropdown-item:hover {
-    background-color: #f5f7fa;
-    transition: 0.3s ease-in-out;
+  background-color: #f5f7fa;
+  transition: 0.3s ease-in-out;
 }
 
 .outer-post {
-    border-bottom: lightgray 1px solid;
+  border-bottom: lightgray 1px solid;
 }
 
 .post {
-    border-radius: 0.4rem;
+  border-radius: 0.4rem;
 }
 
 .post-title {
-    padding-bottom: 1rem;
-    font-weight: 600;
+  padding-bottom: 1rem;
+  font-weight: 600;
 }
 
 .post-description {
-    padding-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 
 .post:hover {
-    background-color: #f5f7fa;
-    transition: 0.3s ease-in-out;
+  background-color: #f5f7fa;
+  transition: 0.3s ease-in-out;
 }
 
 .active {
-    background-color: #f5f7fa;
+  background-color: #f5f7fa;
 }
 
 .logo {
-    height: 350px;
-    width: 350px;
+  height: 350px;
+  width: 350px;
 }
 
 .nav-logo {
-    height: 50px;
-    width: 50px;
+  height: 50px;
+  width: 50px;
 }
 
 .nav-title {
-    text-align: center;
-    display: flex;
-    align-items: center;
-    padding-top: 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  padding-top: 1rem;
+}
+
+.submit {
+  padding-left: 12%;
+  padding-right: 12%;
+}
+
+.search-bttn {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border-right: 0.3px solid black;
+  border-bottom: 0.3px solid black;
+  border-top: 0.3px solid black;
+  border-left: none;
+  padding-left: 1%;
+  padding-right: 1%;
+  background-color: rgb(71, 255, 184);
+}
+
+.search-bar {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom: 0.3px solid black;
+  border-top: 0.3px solid black;
+  border-left: 0.3px solid black;
+  border-right: 0.3px solid black;
+}
+
+.search-bar:focus {
+  background-color: rgba(235, 247, 255, 0.35);
+  outline-style: none;
 }

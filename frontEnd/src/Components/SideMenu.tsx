@@ -24,7 +24,6 @@ const SideMenu = ({ onHide }: props) => {
   const [active, setActive] = useState<string>("home");
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const [input, setInput] = useState<string>("");
-
   const navigate = useNavigate();
 
   const handleShowSearch = (): void => {
@@ -123,6 +122,7 @@ const SideMenu = ({ onHide }: props) => {
         >
           <input
             type="text"
+            className="search-bar"
             placeholder="What are you looking for?"
             style={{
               width: "100%",
@@ -130,10 +130,14 @@ const SideMenu = ({ onHide }: props) => {
             }}
             onChange={handleInput}
           />
-          <button type="submit" onClick={ ()=>{
-            navigate(`/${input}`)
-            handleShowSearch()
-          }}>
+          <button
+          className="search-bttn"
+            type="submit"
+            onClick={() => {
+              navigate(`/${input}`);
+              handleShowSearch();
+            }}
+          >
             Go
           </button>
         </div>

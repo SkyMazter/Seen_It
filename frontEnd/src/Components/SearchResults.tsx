@@ -1,7 +1,7 @@
 const SearchResults = () => {
   return (
     <>
-      <p>Hello World</p>
+      <p>hello r</p>
     </>
   );
 };

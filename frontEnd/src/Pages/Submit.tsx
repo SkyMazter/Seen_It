@@ -84,7 +84,7 @@ const Submit = () => {
   };
 
   return (
-    <Container className="min-vh-100 my-5" fluid="sm">
+    <Container className="my-5 submit" fluid="sm">
       <Row className="justify-content-center">
         <Col>
           <h2>Submit New Post</h2>
@@ -152,7 +152,7 @@ const Submit = () => {
               <Form.Label>Description</Form.Label>
               <Form.Control
                 as="textarea"
-                placeholder="Give a short description of that you are uploading"
+                placeholder="What is this post about?"
                 rows={5}
                 name="description"
                 value={formData.description}
