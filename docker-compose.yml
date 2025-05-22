@@ -13,7 +13,7 @@ services:
     volumes:
       - mydbdata:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pyour_root_password_change_me"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootdb@server"]
       timeout: 20s
       retries: 10
       interval: 30s
@@ -37,15 +37,13 @@ services:
       - "5173:5173"
     volumes:
       - ./frontEnd:/app
-      - ./frontEnd/node_modules:/app/node_modules
+      - node_modules_fronEnd:/app/node_modules
     environment:
-        NODE_ENV: developement
+        NODE_ENV: development
+        VITE_API_URL: http://localhost:3001
     stdin_open: true
     command: npm start
-    depends_on:
-      app_db:
-        condition: service_healthy # Ensure 'db' service is healthy before starting nodejs_app
-    restart: always
+
   
   seen_it_backend:
     container_name: expressjs_server
@@ -55,7 +53,7 @@ services:
       - 3001:3001
     volumes:
       - ./server:/app
-      - ./server/node_modules:/app/node_modules
+      - node_modules_backEnd:/app/node_modules
     environment:
         NODE_ENV: production
         DB_HOST: app_db
@@ -65,7 +63,10 @@ services:
         DB_PORT: 3306
         APP_URL: http://localhost:5173
     depends_on:
-      - app_db
+      app_db:
+        condition: service_healthy # Ensure 'db' service is healthy before starting nodejs_app
 
 volumes:
   mydbdata:
+  node_modules_fronEnd:
+  node_modules_backEnd:
