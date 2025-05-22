@@ -1,20 +1,27 @@
 services:
   app_db:
     image: mysql:latest
-    container_name: ap_db
+    container_name: app_db
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rootdb@server
       MYSQL_DATABASE: database
+      MYSQL_USER: seenit
+      MYSQL_PASSWORD: rootdb@server
     ports:
-      - "3306:3306"
+      - 3306:3306
     volumes:
-      - ./mydbdata:/var/lib/mysql
-
+      - mydbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pyour_root_password_change_me"]
+      timeout: 20s
+      retries: 10
+      interval: 30s
   phpmyadmin:
     container_name: phpmyadmin
     image: phpmyadmin/phpmyadmin:latest
     environment:
-      PMA_HOST: pnk_archive_db
+      PMA_HOST: app_db
       PMA_PORT: 3306
       MYSQL_ROOT_PASSWORD: rootdb@server
     ports:
@@ -22,24 +29,7 @@ services:
     depends_on:
       - app_db
 
-  seen_it_backend:
-    container_name: expressjs_server
-    build: ./server
-    ports:
-      - 3001:3001
-    volumes:
-      - ./server:/app
-      - ./server/node_modules:/app/node_modules
-    environment:
-        NODE_ENV: production
-        DB_HOST: 127.0.0.1
-        DB_USER: root
-        DB_PASSWORD: rootdb@server
-        DB_NAME: database
-        DB_PORT: 3306
-        APP_URL: http://localhost:5173
-    depends_on:
-      - app_db
+
   seen_it_frontend:
     container_name: webui
     build: ./frontEnd 
@@ -53,7 +43,29 @@ services:
     stdin_open: true
     command: npm start
     depends_on:
+      app_db:
+        condition: service_healthy # Ensure 'db' service is healthy before starting nodejs_app
+    restart: always
+  
+  seen_it_backend:
+    container_name: expressjs_server
+    build: ./server
+    restart: always
+    ports:
+      - 3001:3001
+    volumes:
+      - ./server:/app
+      - ./server/node_modules:/app/node_modules
+    environment:
+        NODE_ENV: production
+        DB_HOST: app_db
+        DB_USER: seenit
+        DB_PASSWORD: rootdb@server
+        DB_NAME: database
+        DB_PORT: 3306
+        APP_URL: http://localhost:5173
+    depends_on:
       - app_db
-      - seen_it_backend
+
 volumes:
   mydbdata:

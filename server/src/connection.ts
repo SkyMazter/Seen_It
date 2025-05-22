@@ -10,4 +10,5 @@ const sequelize = new Sequelize({
   port: Number(process.env.DB_PORT),
 });
 
+
 export default sequelize;
