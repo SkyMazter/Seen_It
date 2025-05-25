@@ -34,10 +34,10 @@ services:
     container_name: webui
     build: ./frontEnd 
     ports:
-      - "5173:5173"
+      - 5173:5173
     volumes:
       - ./frontEnd:/app
-      - node_modules_fronEnd:/app/node_modules
+      - node_modules_frontEnd:/app/node_modules
     environment:
         NODE_ENV: development
         VITE_API_URL: http://localhost:3001
@@ -67,5 +67,5 @@ services:
 
 volumes:
   mydbdata:
-  node_modules_fronEnd:
+  node_modules_frontEnd:
   node_modules_backEnd:

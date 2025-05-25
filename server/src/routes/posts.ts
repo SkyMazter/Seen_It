@@ -7,12 +7,21 @@ import {
   getSearchResult,
 } from "../controllers/posts";
 import multer from "multer";
+import { Request as MulterRequest } from "express-serve-static-core";
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Save files in 'uploads' directory
+  destination: (
+    req: MulterRequest,
+    file: Express.Multer.File,
+    cb: (error: Error | null, destination: string) => void
+  ) => {
+    cb(null, "uploads/");
   },
-  filename: (req, file, cb) => {
+  filename: (
+    req: MulterRequest,
+    file: Express.Multer.File,
+    cb: (error: Error | null, filename: string) => void
+  ) => {
     cb(null, Date.now() + "-" + file.originalname);
   },
 });
