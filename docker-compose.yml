@@ -48,7 +48,7 @@ services:
   seen_it_backend:
     container_name: expressjs_server
     build: ./server
-    restart: always
+    restart: on-failure
     ports:
       - 3001:3001
     volumes:
@@ -63,8 +63,7 @@ services:
         DB_PORT: 3306
         APP_URL: http://localhost:5173
     depends_on:
-      app_db:
-        condition: service_healthy # Ensure 'db' service is healthy before starting nodejs_app
+      - app_db
 
 volumes:
   mydbdata:

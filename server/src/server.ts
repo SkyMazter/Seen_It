@@ -25,8 +25,6 @@ app.use("/users", userRouter);
 app.use("/posts", postRouter);
 app.use("/uploads", express.static("uploads"));
 
-
-
 const connectToDb = async () => {
   try {
     await sequelize.authenticate().then(() => {
@@ -48,3 +46,16 @@ const connectToDb = async () => {
     connectToDb(); // Retry connection
   }
 };
+
+connectToDb();
+
+// sequelize
+//   .sync({ alter: true })
+//   .then((): void => {
+//     app.listen(port, (): void => {
+//       console.log(`Server is running on port ${port}`);
+//     });
+//   })
+//   .catch((error: Error): void => {
+//     console.error("Error synchronizing database:", error);
+//   });
