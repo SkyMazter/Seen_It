@@ -1,5 +1,6 @@
-import { DataType, DataTypes, Model } from "sequelize";
+import { DataTypes, HasMany, Model } from "sequelize";
 import sequelize from "../connection";
+import Comment from "./comment";
 
 class Post extends Model {
   public id!: number;
@@ -52,7 +53,9 @@ Post.init(
     sequelize,
     modelName: "Post",
     timestamps: true,
-  },
+  }
 );
+
+Post.hasMany(Comment, { foreignKey: "postId", as: "comments" });
 
 export default Post;

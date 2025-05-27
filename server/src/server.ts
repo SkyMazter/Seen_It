@@ -42,20 +42,9 @@ const connectToDb = async () => {
     console.log("Connection has been established successfully.");
   } catch (error) {
     console.error("Unable to connect to the database:", error);
-    await new Promise((resolve) => setTimeout(resolve, 30000)); // Wait 5 seconds
+    await new Promise((resolve) => setTimeout(resolve, 20000)); // Wait 20 seconds
     connectToDb(); // Retry connection
   }
 };
 
 connectToDb();
-
-// sequelize
-//   .sync({ alter: true })
-//   .then((): void => {
-//     app.listen(port, (): void => {
-//       console.log(`Server is running on port ${port}`);
-//     });
-//   })
-//   .catch((error: Error): void => {
-//     console.error("Error synchronizing database:", error);
-//   });
