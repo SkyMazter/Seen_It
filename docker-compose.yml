@@ -48,12 +48,9 @@ services:
   seen_it_backend:
     container_name: expressjs_server
     build: ./server
-    restart: on-failure
+    restart: always
     ports:
       - 3001:3001
-    volumes:
-      - ./server:/app
-      - node_modules_backEnd:/app/node_modules
     environment:
         NODE_ENV: production
         DB_HOST: app_db
@@ -68,4 +65,3 @@ services:
 volumes:
   mydbdata:
   node_modules_frontEnd:
-  node_modules_backEnd:
