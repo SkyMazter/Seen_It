@@ -18,7 +18,7 @@ const handleEmpty = (
   category: string,
   description: string,
   fileName: string,
-  filePath: string,
+  filePath: string
 ): string | undefined => {
   if (userId == null) {
     return "userId";
@@ -52,7 +52,7 @@ const newPost = async (req: Request, res: Response): Promise<Response> => {
     category,
     fileName,
     description,
-    filePath,
+    filePath
   );
 
   if (errorMessage) {
@@ -124,7 +124,7 @@ const getLastPosts = async (req: Request, res: Response): Promise<Response> => {
 
 const getFilteredPosts = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<Response> => {
   const category: string = req.query.category as string;
   const n: number = parseInt(req.query.n as string) || 50;
@@ -143,7 +143,7 @@ const getFilteredPosts = async (
 
 const getSearchResult = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<Response> => {
   const search: string = req.query.search as string;
 
@@ -161,6 +161,29 @@ const getSearchResult = async (
   } catch (error) {
     console.error("Error fetching posts:", error);
     return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+const newComment = async (req: Request, res: Response): Promise<Response> => {
+  const id: number = parseInt(req.query.id as string) || -1;
+
+  if (id == -1) {
+     return res.status(500).json({ Message: "There was no id provided." });
+  }
+
+  try {
+    const post = await Post.findAll({
+      where: {
+        postId: {
+          [Op.eq]: id,
+        },
+      },
+    });
+    return res.json(post);
+  } catch (error) {
+    console.error("Error Creating Post:", error);
+
+    return res.status(500).json({ Message: "Internal Server Error" });
   }
 };
 
